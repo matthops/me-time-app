@@ -1,30 +1,43 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Card, ListItem, Button, Icon, CheckBox } from 'react-native-elements'
 
 import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
+  const [checked, setChecked] = React.useState(false)
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-         
-        </View>
-
-        <View style={styles.getStartedContainer}>
-          
-          <Text style={styles.getStartedText}>
-            Weekly Focus        
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
+        <Card title="Weekly Focus" > 
         <Text style={styles.getStartedText}>
-            Habits         
+            Track Everyday, all of my food, whenever I can, becuase at the end of the day, tracking is the most important element of my weight loss journey, ya know?   
           </Text>
-        </View>
+        </Card>
+        <Card  title="Habits" > 
+        <ListItem
+        title='Habit One.'
+        containerStyle={{paddingTop: 0, paddingBottom: 0}}
+        rightElement={<CheckBox checked={checked} onPress={() => setChecked(!checked) }/>}
+        bottomDivider
+      />
+        <ListItem
+        title='Habit Two'
+        containerStyle={{paddingTop: 0, paddingBottom: 0}}
+        rightElement={<CheckBox checked={checked} onPress={() => setChecked(!checked) }/>}
+        bottomDivider
+      />
+        </Card>
+        <Card title="Notes">
+        <TextInput
+          multiline={true}
+          numberOfLines={4}
+    // onChangeText={(text) => this.setState({text})}
+    // value={this.state.text}
+    />
+        </Card>
       </ScrollView>
     </View>
   );
