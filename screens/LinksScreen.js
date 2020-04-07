@@ -1,21 +1,64 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import { Card, ListItem, Button, Icon, CheckBox } from 'react-native-elements'
+import { DataTable } from 'react-native-paper';
 
 export default function LinksScreen() {
+  const [value, setValue ] = React.useState("")
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-     
-     <Text> Weekly Focus</Text>
+     <Card title="Weekly Focus">
+        <TextInput
+          multiline={true}
+          numberOfLines={4}
+          placeholder='What would you like to focus on this week?'
+    // onChangeText={(text) => this.setState({text})}
+    // value={this.state.text}
+    />
+        </Card>
 
-      {/* <OptionButton
-        icon="ios-chatboxes"
-        label="Ask a question on the forums"
-        onPress={() => WebBrowser.openBrowserAsync('https://forums.expo.io')}
-        isLastOption
-      /> */}
+        <Card title='Habits' > 
+          <DataTable> 
+          <DataTable.Header>
+            <DataTable.Title style={{ minWidth: 100}}>Habit</DataTable.Title>
+            <DataTable.Title>M</DataTable.Title>
+            <DataTable.Title>T</DataTable.Title>
+            <DataTable.Title>W</DataTable.Title>
+            <DataTable.Title>Th</DataTable.Title>
+            <DataTable.Title>F</DataTable.Title>
+            <DataTable.Title>Sa</DataTable.Title>
+            <DataTable.Title>Su</DataTable.Title>
+        </DataTable.Header>
+        <DataTable.Row>
+          <DataTable.Cell style={{ minWidth: 100}} >Habit One two one two </DataTable.Cell>
+          <DataTable.Cell> X </DataTable.Cell>
+          <DataTable.Cell> - </DataTable.Cell>
+          <DataTable.Cell> X </DataTable.Cell>
+          <DataTable.Cell> - </DataTable.Cell>
+          <DataTable.Cell> X </DataTable.Cell>
+          <DataTable.Cell> - </DataTable.Cell>
+          <DataTable.Cell> - </DataTable.Cell>
+        </DataTable.Row>
+        <DataTable.Row>
+          <DataTable.Cell style={{ minWidth: 100}}>Habit Two</DataTable.Cell>
+          <DataTable.Cell> X </DataTable.Cell>
+          <DataTable.Cell> X </DataTable.Cell>
+          <DataTable.Cell> X </DataTable.Cell>
+          <DataTable.Cell> X </DataTable.Cell>
+          <DataTable.Cell> X </DataTable.Cell>
+          <DataTable.Cell> - </DataTable.Cell>
+          <DataTable.Cell> - </DataTable.Cell>
+        </DataTable.Row>
+        <DataTable.Row>
+          <DataTable.Cell style={{ minWidth: 100}}> <Text style={{ color: 'grey'}}> Add Habit</Text> </DataTable.Cell>
+        </DataTable.Row>
+          </DataTable>
+        </Card>
+     
     </ScrollView>
   );
 }
