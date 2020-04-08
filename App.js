@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ApiKeys from './constants/ApiKeys'
 import * as firebase from "firebase"
+import Login from "./screens/Login"
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
@@ -16,6 +17,7 @@ const Stack = createStackNavigator();
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
   const [initialNavigationState, setInitialNavigationState] = React.useState();
+  const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false)
   const containerRef = React.useRef();
   const { getInitialState } = useLinking(containerRef);
   if(!firebase.apps.length) firebase.initializeApp(ApiKeys.FirebaseConfig)
@@ -49,7 +51,7 @@ export default function App(props) {
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null;
   } else {
-    return (
+    return ( isUserLoggedIn ? 
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
@@ -57,7 +59,7 @@ export default function App(props) {
             <Stack.Screen name="Root" component={BottomTabNavigator} />
           </Stack.Navigator>
         </NavigationContainer>
-      </View>
+      </View> : <Login setIsUserLoggedIn={setIsUserLoggedIn} />
     );
   }
 }
